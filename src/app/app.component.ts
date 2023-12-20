@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { CatalogService } from './catalog.service';
+import {Book} from "./book";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'bookshop-fe';
+export class AppComponent implements OnInit {
+  title = 'frontakroo';
+
+  constructor(private catalogService: CatalogService) {}
+
+  public getCatalog(): void {
+    this.catalogService.getCatalog().subscribe(
+      (response: Book[]) => {
+        console.log("Got book list:");
+        console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error.message);
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.getCatalog();
+  }
 }
