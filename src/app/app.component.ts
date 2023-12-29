@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { CatalogService } from './catalog.service';
+import {CatalogService} from './catalog.service';
 import {Book} from "./book";
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -10,6 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class AppComponent implements OnInit {
   title = 'frontakroo';
+  public catalog: Book[];
 
   constructor(private catalogService: CatalogService) {}
 
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
       (response: Book[]) => {
         console.log("Got book list:");
         console.log(response);
+        this.catalog = response;
       },
       (error: HttpErrorResponse) => {
         console.error(error.message);
