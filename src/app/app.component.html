@@ -2,6 +2,7 @@
   <a class="navbar-brand" style="color:white;">Bookaro</a>
   <div class="float-right">
   <a href="#"
+  (click)="onOpenModal('cart')"
       style="margin-right: 10px ; color: white">Cart ({{countCartItems()}})</a>
       </div>
   </nav>
@@ -40,3 +41,32 @@
       </div>
     </div>
   </div>
+  <!-- Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Your cart ({{countCartItems()}})</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let item of cartItem">
+          <img src="{{item.book.coverUrl}}" alt="" class="shadow img-fluid rounded w-60 float-right">
+          <h4>{{item.book.title}}</h4>
+          <h6><span *ngFor="let author of item.book.authors; last as isLast">{{author.name}}<span *ngIf="!isLast">, </span></span></h6>
+          {{item.quantity}} copies for $ {{item.book.price | number: '1.2'}}
+          <hr />
+        </div>
+        <h5>Total order amount</h5>
+        <h4>$ {{totalCartAmount() | number: '1.2'}}</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="clearCart()" class="btn btn-danger align-left" data-dismiss="modal">Clear Cart</button>
+        <button id="close-cart-button" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Finish Order</button>
+      </div>
+    </div>
+  </div>
+</div>
