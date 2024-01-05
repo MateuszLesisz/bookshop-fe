@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Book } from "./book";
 import { catchError, tap } from 'rxjs/operators';
 import { CartItem } from "./cartitem";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -73,5 +74,10 @@ export class AppComponent implements OnInit {
     }
     container?.appendChild(button);
     button.click();
+    }
+
+    public onOrderSubmit(orderForm: NgForm): void {
+      console.log("Receiverd for: {}");
+      console.log(orderForm);
     }
 }

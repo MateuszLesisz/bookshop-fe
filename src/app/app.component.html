@@ -65,8 +65,53 @@
       <div class="modal-footer">
         <button type="button" (click)="clearCart()" class="btn btn-danger align-left" data-dismiss="modal">Clear Cart</button>
         <button id="close-cart-button" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Finish Order</button>
+        <button type="button" (click)="onOpenModal('order')" class="btn btn-primary">Finish Order</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Order details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #orderForm="ngForm" (ngSubmit)="onOrderSubmit(orderForm)">
+          <div class="form-group">
+            <div class="form-group">
+              <label for="nameField">Name</label>
+              <input ngModel name="name" type="text" class="form-control" id="nameField" required>
+            </div>
+            <label for="emailField">Email address</label>
+            <input ngModel name="email" type="email" class="form-control" id="emailField" required>
+          </div>
+          <div class="form-group">
+            <label for="phoneField">Phone</label>
+            <input ngModel name="phone" type="text" class="form-control" id="phoneField" required>
+          </div>
+          <div class="form-group">
+            <label for="streetField">Street</label>
+            <input ngModel name="street" type="text" class="form-control" id="streetField" required>
+          </div>
+          <div class="form-group">
+            <label for="cityField">City</label>
+            <input ngModel name="city" type="text" class="form-control" id="cityField" required>
+          </div>
+          <div class="form-group">
+            <label for="zipCodeField">ZIP Code</label>
+            <input ngModel name="zip" type="text" class="form-control" id="zipCodeField" required>
+          </div>
+          <div class="modal-footer">
+            <button id="cancel-order-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
     </div>
   </div>
 </div>
